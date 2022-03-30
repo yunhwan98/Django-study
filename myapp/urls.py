@@ -7,5 +7,6 @@ urlpatterns = [#사용자가 들어온 경로 적기
     path('',views.index),   #view.index로 위임
     path('create/',views.create),
     path('read/<id>/', views.read),
+    path('update/<id>/', views.update),
     path('delete/', views.delete)   #delete로 위임
 ]
