@@ -13,29 +13,37 @@ def HTMLTemplate(articleTag): #템플릿 생성 함수 만들기
     return f'''
     <html>
     <body>
-        <h1><a href="/">Django</a></h1> #Django 클릭시 홈으로 이동
+        <h1><a href="/">Django</a></h1> <!-- 클릭시 django로 이동-->
         <ul>
             {ol}
         </ul>
-        {articleTag}    #articleTag따라 내용 변경
+        {articleTag}    <!-- articleTag따라 내용 변경 -->
+      <ul>
+            <li><a href="/create/">create</a></li>
+        </ul>
     </body>
     </html>
     '''
-
 def index(request):
     article = '''
     <h2>Welcome</h2> 
     Hello, Django
     '''
     return HttpResponse(HTMLTemplate(article))
-
 def read(request, id):
     global topics
     article = ''
     for topic in topics:
-        if topic['id'] == int(id):  #선택한 id가 된다면
-            article = f'<h2>{topic["title"]}</h2>{topic["body"]}'   #article 지정
+        if topic['id'] == int(id):
+            article = f'<h2>{topic["title"]}</h2>{topic["body"]}'
     return HttpResponse(HTMLTemplate(article))
 
 def create(request):
-    return HttpResponse('Create')
+    article = '''
+        <form action="/create/">     <!--폼 생성 -->
+            <p><input type="text" name="title" placeholder="title"></p> <!--제목 -->
+            <p><textarea name="body" placeholder="body"></textarea></p> <!--내용 -->
+            <p><input type="submit"></p>  <!--제출 -->
+        </form>
+    '''
+    return HttpResponse(HTMLTemplate(article))
