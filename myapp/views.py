@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.views.decorators.csrf import csrf_exempt    #csrf 에러 스킵
 topics = [
     {'id':1, 'title':'routing', 'body':'Routing is ..'},
     {'id':2, 'title':'view', 'body':'View is ..'},
@@ -38,9 +39,10 @@ def read(request, id):
             article = f'<h2>{topic["title"]}</h2>{topic["body"]}'
     return HttpResponse(HTMLTemplate(article))
 
+@csrf_exempt    #csrf 에러 스킵
 def create(request):
     article = '''
-        <form action="/create/">     <!--폼 생성 -->
+        <form action="/create/" method="post">     <!--폼 생성, post방식으로 변경 -->
             <p><input type="text" name="title" placeholder="title"></p> <!--제목 -->
             <p><textarea name="body" placeholder="body"></textarea></p> <!--내용 -->
             <p><input type="submit"></p>  <!--제출 -->
