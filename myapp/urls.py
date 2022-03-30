@@ -6,5 +6,6 @@ from myapp import views
 urlpatterns = [#사용자가 들어온 경로 적기
     path('',views.index),   #view.index로 위임
     path('create/',views.create),
-    path('read/<id>/',views.read) #id를 변경하여 접속가능
+    path('read/<id>/', views.read),
+    path('delete/', views.delete)   #delete로 위임
 ]
